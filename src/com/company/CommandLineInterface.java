@@ -17,23 +17,43 @@ public class CommandLineInterface {
     public Part enterNewPart() {
         Scanner input = new Scanner(in);
 
-        out.print("Enter A new Part Number: ");
+        out.print("Enter a new Part Number: ");
         String partNumber = input.nextLine();
 
-        out.print("Enter A Description: ");
+        out.print("Enter a Description: ");
         String description = input.nextLine();
 
-        Part part = new Part.Builder()
+        return new Part.Builder()
                 .withPartNumber(partNumber)
                 .withDescription(description)
                 .build();
-
-        out.println("New Part Created: " + partNumber + "|" + description);
-
-        return part;
     }
 
+    public void showPartSaved(Part part) {
+        out.println("New Part Created.\n");
+        showPart(part);
+    }
+
+
     public void displayVersion() {
-        out.println("Lego Inventory " + Main.VERSION + "\n");
+        out.println("Lego Inventory " + LegoInventory.VERSION + "\n");
+    }
+
+    public void showInvalidPart(String partNumber) {
+        out.println("Part " + partNumber + " does not exist.");
+    }
+
+    public void showPart(Part p) {
+        out.println("Part Number: " + p.getPartNumber() + "\tDescription: " + p.getDescription());
+    }
+
+    public String showPrompt() {
+        out.print("legoi# ");
+        Scanner input = new Scanner(in);
+        return input.nextLine();
+    }
+
+    public void showInvalidCommand() {
+        out.println("Invalid Command");
     }
 }
